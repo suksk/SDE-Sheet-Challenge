@@ -1,0 +1,54 @@
+class Solution {
+    public void nextPermutation(int[] nums) {
+        int n = nums.length;
+
+		//Step 1: Find the break point 
+		int ind = -1;  //break point
+
+		for(int i = n-2; i >= 0; i--)
+		{
+			if(nums[i] < nums[i+1])
+			{
+				//index i is the break point
+				ind = i;
+				break;
+			}
+		}
+
+		//If break point does not exist
+		/** if(ind == -1)
+		{
+			//Reverse the whole array 
+			int l = 0,r = n - 1;
+            while(l<r)
+            {
+            int temp = nums[r];
+            nums[r] = nums[l];
+            nums[l] = temp;
+            l++;r--;
+            }
+		}
+		*/
+		//Step 2: Find the next greater element 
+		//        and swap it with arr[ind]
+		for(int i = n-1; i > ind && ind != -1 ; i--)
+		{
+			if(nums[i] > nums[ind])
+			{
+				int temp = nums[i];
+				nums[i] = nums[ind];
+				nums[ind] = temp;
+				break;
+			}
+		}
+        //Step 3: Reverse the right half
+
+		int l = ind + 1,r = n - 1;
+        while(l<r){
+            int temp = nums[l];
+            nums[l] = nums[r];
+            nums[r] = temp;
+            l++;r--;
+        }
+    }
+}
